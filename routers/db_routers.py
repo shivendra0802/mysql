@@ -62,3 +62,39 @@ class Aqua:
         if app_label in self.route_app_labels:
             return db == 'aqua_db'
         return None
+
+class Sample:
+    route_app_labels = {'sample',}
+
+    def db_for_read(self, model, **hints):
+        if model._meta.app_label in self.route_app_labels:
+            return 'sample'
+        return None
+
+    def db_for_write(self, model, **hints):
+        if model._meta.app_label in self.route_app_labels:
+            return 'sample'
+        return None
+
+    def allow_migrate(self, db, app_label, model_name=None, **hints):
+        if app_label in self.route_app_labels:
+            return db == 'sample'
+        return None      
+
+class Customer:
+    route_app_labels = {'customer',}
+
+    def db_for_read(self, model, **hints):
+        if model._meta.app_label in self.route_app_labels:
+            return 'customer'
+        return None
+
+    def db_for_write(self, model, **hints):
+        if model._meta.app_label in self.route_app_labels:
+            return 'customer'
+        return None
+
+    def allow_migrate(self, db, app_label, model_name=None, **hints):
+        if app_label in self.route_app_labels:
+            return db == 'customer'
+        return None    

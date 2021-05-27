@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import pymysql
+
+pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blue',
     'aqua',
+    'sample',
+    'customer',
 ]
 
 MIDDLEWARE = [
@@ -89,23 +94,25 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'aqua.db.sqlite3',
     },
-       # using mysql database
-# }     'users': {
-#         'NAME': 'user_data',
-#         'ENGINE': 'django.db.backends.mysql',
-#         'USER': 'mysql_user',
-#         'PASSWORD': 'superS3cret'
-#     },
-#    using
-#     'customers': {
-    #     'NAME': 'app_data',
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'USER': 'postgres_user',
-    #     'PASSWORD': 'supers3secret'
-    # },
-#         
+    'sample': {
+        'NAME': 'sample',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'cheems',
+        'PASSWORD': 'test@123',
+    },
+    'Customer': {
+        'NAME': 'mydb',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+}    
+        
 #     }
-}
+
+
 
 
 # Password validation
@@ -152,4 +159,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-DATABASE_ROUTERS = ['routers.db_routers.AuthRouter', 'routers.db_routers.Blue', 'routers.db_routers.Aqua',]
+DATABASE_ROUTERS = ['routers.db_routers.AuthRouter', 'routers.db_routers.Blue', 'routers.db_routers.Aqua','routers.db_routers.Sample','routers.db_routers.Customer',]
